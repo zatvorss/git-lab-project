@@ -34,7 +34,7 @@ def client(c, a):
 
 def show_tasks(t):
     if not t:
-        return "📋 Список задач пуст"
+        return "Список задач пуст"
     return "\n".join(f"{i}. {'✓' if task[1] else '○'} {task[0]}" for i, task in enumerate(t, 1))
 
 print("Сервер запущен на localhost:8888")
