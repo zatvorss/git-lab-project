@@ -1,0 +1,49 @@
+import tkinter as tk
+from tkinter import ttk, messagebox
+
+kurs = {
+    "USD": 1.0,
+    "EUR": 0.92,
+    "RUB": 97.50,
+    "GBP": 0.79,
+    "CNY": 7.24
+}
+
+def pereschet():
+    try:
+        a = float(vvod.get())
+        from_v = combo1.get()
+        to_v = combo2.get()
+        v_doll = a / kurs[from_v]
+        rez = v_doll * kurs[to_v]
+        itog.config(text=str(round(rez, 2)) + " " + to_v)
+    except:
+        messagebox.showerror("Ошибка", "Введи число")
+
+okno = tk.Tk()
+okno.title("Конвертер")
+okno.geometry("500x400")
+okno.config(bg="lightyellow")
+
+tk.Label(okno, text="Сумма:", bg="lightyellow").pack(pady=5)
+vvod = tk.Entry(okno)
+vvod.pack(pady=5)
+vvod.bind("<Return>", lambda e: pereschet())
+
+tk.Label(okno, text="Откуда:", bg="lightyellow").pack(pady=5)
+combo1 = ttk.Combobox(okno, values=list(kurs.keys()))
+combo1.set("USD")
+combo1.pack(pady=5)
+
+tk.Label(okno, text="Куда:", bg="lightyellow").pack(pady=5)
+combo2 = ttk.Combobox(okno, values=list(kurs.keys()))
+combo2.set("EUR")
+combo2.pack(pady=5)
+
+knopka = tk.Button(okno, text="Конвертировать", command=pereschet)
+knopka.pack(pady=10)
+
+itog = tk.Label(okno, text="0.0", bg="lightyellow", font=("Arial", 14))
+itog.pack(pady=5)
+
+okno.mainloop()
