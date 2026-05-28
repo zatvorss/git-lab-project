@@ -1,0 +1,19 @@
+#!/bin/bash
+
+f() {
+    d="$1"
+    
+    if [ -z "$d" ]; then
+        echo "Ошибка: нужна директория" >&2
+        exit 1
+    fi
+    
+    if [ ! -d "$d" ]; then
+        echo "Ошибка: '$d' - не директория" >&2
+        exit 1
+    fi
+    
+    find "$d" -type f -mtime -1 2>/dev/null
+}
+
+f "$1"
